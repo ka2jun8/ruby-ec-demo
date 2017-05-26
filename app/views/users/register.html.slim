@@ -1,0 +1,14 @@
+h1 user register
+
+body
+
+  p ユーザの登録
+
+  = form_for "user" do |f|
+    = f.label "ユーザ名: "
+    = f.text_field :name 
+    br
+    = f.label "マイナンバー: "
+    = f.text_field :smoid
+    br
+    = f.submit "register"

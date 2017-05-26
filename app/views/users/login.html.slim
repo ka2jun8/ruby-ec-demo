@@ -1,0 +1,13 @@
+h1 user login
+
+body
+
+  p ユーザログイン
+
+  = form_for "user" do |f|
+    = f.label "ユーザ名: "
+    = f.text_field :name 
+    br
+    = f.submit "login"
+
+  = link_to "sign-in", "register"

@@ -1,0 +1,15 @@
+h1 user setting
+
+body
+
+  p ユーザ: #{@user_id} の登録
+
+  = form_for "user" do |f|
+    = f.label "ユーザ名: "
+    = f.text_field :name 
+    br
+    = f.label "マイナンバー: "
+    = f.text_field :smoid
+    br
+    = f.submit "submit"
+

@@ -1,0 +1,48 @@
+.container
+  .row
+    .col-md-3
+      p.lead Home
+      .list-group
+        a.list-group-item href="#" Category 1
+        a.list-group-item href="#" Category 2
+        a.list-group-item href="#" Category 3
+
+    .col-md-9
+      .row.carousel-holder
+        .col-md-12
+          div.carousel.slide id="carousel-example-generic" data-ride="carousel"
+            ol.carousel-indicators
+              li.active data-target="#carousel-example-generic" data-slide-to="0"
+              li data-target="#carousel-example-generic" data-slide-to="1"
+              li data-target="#carousel-example-generic" data-slide-to="2"
+            .carousel-inner
+              .item.active
+                img.slide-image src="http://placehold.it/800x300" alt=""
+              .item
+                img.slide-image src="http://placehold.it/800x300" alt=""
+              .item
+                img.slide-image src="http://placehold.it/800x300" alt=""
+                
+            a.left.carousel-control href="#carousel-example-generic" data-slide="prev"
+              span.glyphicon.glyphicon-chevron-left
+            a.right.carousel-control href="#carousel-example-generic" data-slide="next"
+              span.glyphicon.glyphicon-chevron-right
+
+      .row
+        - @items.each_with_index do |item, i|
+          .col-sm-4.col-lg-4.col-md-4
+            .thumbnail
+              img src="http://placehold.it/320x150" alt=""
+              .caption
+                h4.pull-right #{item.price}円
+                h4
+                  a href="#" = item.name
+                p = item.about
+                p.pull-right 
+                  a.btn.btn-info href="/home/add_item/#{item.id}" Add
+
+        .col-sm-4.col-lg-4.col-md-4
+          h4
+            a href="/register/cart" See to my cart
+          p
+            a href="/register/cart" カートの中身を見る
