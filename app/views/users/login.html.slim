@@ -1,13 +1,19 @@
-h1 user login
+h1　ユーザログイン
 
-body
+.row
+  .col-sm-8 style="margin 100px;"
+    form.form-horizontal action="/users/signin" id="user" method="post"
+        .form-group
+            label.control-label.col-xs-2 ユーザID
+            .col-xs-5
+                input.form-control type="text" name="name"
+        .form-group
+            label.control-label.col-xs-2 パスワード
+            .col-xs-5
+                input.form-control type="password" name="password"
+        .form-group
+            .col-xs-offset-2.col-xs-10
+                button.btn.btn-default  type="submit" ログイン
 
-  p ユーザログイン
-
-  = form_for "user" do |f|
-    = f.label "ユーザ名: "
-    = f.text_field :name 
-    br
-    = f.submit "login"
-
-  = link_to "sign-in", "register"
+    .col-sm-8
+      a href="/users/register" Sign up

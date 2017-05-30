@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
 
-  post "/home/add_item/:item_id" => "home#add_item"
-  post "/home/delete_item/:item_id" => "home#delete_item"
+  get "/home/add_item/:item_id" => "home#add_item"
+  get "/home/delete_item/:item_id" => "home#delete_item"
 
   get 'users/index'
 
@@ -20,12 +20,15 @@ Rails.application.routes.draw do
   post "users/setting" => "users#setting"
 
   get 'users/login'
-  post "users/login" => "users#signin"
+  post "users/signin" => "users#signin"
 
   get "users/logout" => "users#logout"
 
   get 'users/register'
-  post "users/register" => "users#create"
+
+  post "users/create" => "users#create"
+
+  # resources :users
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

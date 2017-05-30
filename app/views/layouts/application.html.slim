@@ -17,7 +17,6 @@ html
 
     .notice
     = notice
-
     .alert
     = alert
 
@@ -42,6 +41,8 @@ html
               a href="/users/setting" User
 
     = yield
+
+    = debug(params) if Rails.env.development?
 
     footer
       .row

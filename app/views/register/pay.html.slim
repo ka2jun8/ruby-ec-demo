@@ -1,16 +1,19 @@
 h2 支払い
 
-div 合計金額
-= @items.sum { |item| item[:price]}
-| 円
+.payment style="margin: 50px;"
 
-br
-br
+  .col-sm-2 合計金額
+  = @items.sum { |item| item[:price]}
+  | 円
 
-div クレジット情報
-= @credit.force_encoding("UTF-8")
+  br
 
-br
-br
+  .col-sm-2 クレジット情報
+  = @user.credit
+  / = @credit.force_encoding("UTF-8")
 
-= link_to "支払いする", "arigato"
+  br
+  br
+  
+  .col-sm-1
+  = link_to "支払い確定", "arigato"

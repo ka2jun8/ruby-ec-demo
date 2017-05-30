@@ -1,16 +1,20 @@
 h3 カートの中身 
 
-table.table1 border=1
+
+.column style="margin: 50px;"
   - @items.each_with_index do |item, i|
-    tr
-      td.no = i
-      td.title = item.name
-      td.price = item.price
-      td.cart  = button_to "delete", controller: 'home', action: "delete_item", :item_id=>item.id
+    .row
+      .col-sm-3
+        h4.pull-left 
+          a href="" = item.name
+        p.pull-right 
+          a.btn.btn-info href="/home/delete_item/#{item.id}" Delete
 
-  tr
-    td.no = ""
-    td.title = "合計"
-    td.price = @items.sum { |item| item[:price]}
+  .row
+    .col-sm-3
+      h4.pull-left 合計
+      h4.pull-right
+        = @items.sum { |item| item[:price] } 
+        | 円
 
-= link_to "レジに進む", "pay"
+    a.btn.btn-warning href="/register/pay" レジに進む

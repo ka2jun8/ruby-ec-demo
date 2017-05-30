@@ -2,6 +2,7 @@ require 'net/http'
 
 class UsersController < ApplicationController
   def index
+    redirect_to "/users/login"
   end
 
   def login
@@ -19,43 +20,42 @@ class UsersController < ApplicationController
     @user_id = session[:user_id]
   end
 
+  def show
+    @user = User.find(params[:id])
+    # debugger
+  end
+
   def signin
-    @user = User.find_by(name: params[:user][:name])
+    @user = User.find_by(name: params[:name])
+
     if @user.name.blank?
       redirect_to "/users/login"
     else
-      session[:user_id] = @user.id
-      redirect_to "/"
+      if @user.password != params[:password]
+        redirect_to "/users/login"
+      else
+        session[:user_id] = @user.id
+        puts "成功: #{session[:user_id]}"
+        redirect_to "/"
+      end
     end
   end
 
   def create
-    # atesaki = "http://localhost:9003/v1/system/objects/"+params[:user][:smoid]
-    # uri = URI.parse(atesaki)
-    # http = Net::HTTP.new(uri.host, uri.port)
-    # res = http.start {
-    #   http.get(uri.request_uri)
-    # }
+    # logger.debug params.to_yaml
+    @user = User.new
+    @user.name = params[:name]
+    @user.password = params[:password]
+    @user.mail = params[:mail]
+    @user.address = params[:address]
+    @user.phone = params[:phone]
+    @user.credit = params[:credit]
+    session[:user_id] = @user.id
 
-    res = Hash.new
-    res.code = "200"
-    res.body = "test"
-
-    # logger.debug "res.to_yaml"
-    # logger.debug res.to_yaml
-    # logger.debug res.code
-
-    if res.code == "200"
-      # result = JSON.parse(res.body)
-      @user = User.new
-      @user.name = params[:user][:name]
-      @user.smoid = params[:user][:smoid]
-      session[:user_id] = @user.id
-      @user.save
+    if @user.save
       redirect_to "/"
-    else
-      puts "OMG!! #{res.code} #{res.message}"
-      redirect_to "/"
+    else 
+      redirect_to "/users/register"
     end
 
   end

@@ -1,14 +1,60 @@
-h1 user register
+h1 ユーザ登録
 
-body
-
-  p ユーザの登録
-
-  = form_for "user" do |f|
-    = f.label "ユーザ名: "
-    = f.text_field :name 
-    br
-    = f.label "マイナンバー: "
-    = f.text_field :smoid
-    br
-    = f.submit "register"
+.container
+    .errors
+        - if !@user.blank? && @user.errors.any?
+            p #{@user.errors.count}件のエラーがありました
+            ul
+                - @user.errors.full_messages.each do |message|
+                    li message
+    .main
+    ul.nav.nav-tabs
+      li.active 
+        a href="#tab1" data-toggle="tab" Default
+      li 
+        a href="#tab2" data-toggle="tab" マイナンバーでサインインする
+      
+    .main.tab-content style="margin: 10px"
+      .tab-pane.fade.in.active id="tab1"
+        form.form-horizontal action="/users/create" id="user" method="post"
+            .form-group
+                label.control-label.col-xs-2 ユーザID
+                .col-xs-5
+                    input.form-control type="text" name="name"
+            .form-group
+                label.control-label.col-xs-2 パスワード
+                .col-xs-5
+                    input.form-control type="password" name="password"
+            .form-group
+                label.control-label.col-xs-2 メールアドレス
+                .col-xs-5
+                    input.form-control type="text" name="mail"
+            .form-group
+                label.control-label.col-xs-2 住所
+                .col-xs-5
+                    input.form-control type="text" name="address"
+            .form-group
+                label.control-label.col-xs-2 電話番号
+                .col-xs-5
+                    input.form-control type="text" name="phone"
+            .form-group
+                label.control-label.col-xs-2 クレジットカード
+                .col-xs-5
+                    input.form-control type="text" name="credit"
+            .form-group
+                .col-xs-offset-2.col-xs-10
+                    button.btn.btn-default type="submit" 登録
+    
+      .tab-pane.fade id="tab2"
+        form.form-horizontal action="/users/create_with_mynumber" id="user" method="post"
+            .form-group
+                label.control-label.col-xs-2 ユーザID
+                .col-xs-5
+                    input.form-control type="text" name="name"
+            .form-group
+                label.control-label.col-xs-2 マイナンバー
+                .col-xs-5
+                    input.form-control type="text" name="smoid"
+            .form-group
+                .col-xs-offset-2.col-xs-10
+                    button.btn.btn-default type="submit" 登録

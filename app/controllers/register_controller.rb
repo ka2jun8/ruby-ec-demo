@@ -33,6 +33,11 @@ class RegisterController < ApplicationController
       #   puts "OMG!! #{res.code} #{res.message}"
       #   redirect_to "/"
       # end
+
+      @items = Array.new
+      @user.cart.split(",").each do |itemid|
+        @items.push(Item.find(itemid))
+      end
     end
 
   end
